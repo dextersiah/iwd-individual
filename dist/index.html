@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <script type="text/javascript">
+            (function() {
+                var css = document.createElement("link");
+                css.href =
+                    "https://use.fontawesome.com/releases/v5.1.0/css/all.css";
+                css.rel = "stylesheet";
+                css.type = "text/css";
+                document.getElementsByTagName("head")[0].appendChild(css);
+            })();
+        </script>
+        <link
+            href="https://fonts.googleapis.com/css?family=Rubik&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/style.css" />
+        <title>The Florist</title>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <div class="header-section">
+                    <p>Welcome user</p>
+                    <div class="header-menu">
+                        <ul class="account-details">
+                            <li class="account-details-item">
+                                <a href="#"
+                                    >My Account <i class="fas fa-angle-down"></i
+                                ></a>
+                                <ul>
+                                    <li>
+                                        <a href="#">Register</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Login</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Wishlist</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <i class="fas fa-shopping-cart"></i>
+                                <a href="#">RM1,000</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header-navigation">
+                    <a href="#">The Florist</a>
+                    <div class="nav-bar">
+                        <li class="nav-bar-item">
+                            <a href="#">HOME</a>
+                        </li>
+                        <li class="nav-bar-item">
+                            <a href="#">PRODUCT</a>
+                        </li>
+                        <li class="nav-bar-item">
+                            <a href="#">TESTIMONIAL</a>
+                        </li>
+                        <li class="nav-bar-item">
+                            <a href="#">CONTACT</a>
+                        </li>
+                    </div>
+                </div>
+            </header>
+            <section class="hero-section">
+                <div class="hero">
+                    <div class="content">
+                        <h1>The <span>Perfect</span> Bouquet</h1>
+                        <p>Inspired By The Beauty Of Nature</p>
+                        <a href="#">Get It Now</a>
+                    </div>
+                    <img class="hero-img" src="/dist/img/slider-2.jpg" alt="" />
+                </div>
+            </section>
+            <section class="product-section">
+                <div class="head">
+                    <h2>Featured Product</h2>
+                    <div class="product-filter">
+                        <ul class="filter-button-group">
+                            <li>
+                                <a href="#/" data-filter="*">All</a>
+                            </li>
+                            <li>
+                                <a href="#/" data-filter=".winter">Winter</a>
+                            </li>
+                            <li>
+                                <a href="#/" data-filter=".various">Various</a>
+                            </li>
+                            <li>
+                                <a href="#/" data-filter=".greens">Greens</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-grid">
+                    <div class="product-item pic1">
+                        <img src="/dist/img/dutchman.jpg" alt="flower" />
+                    </div>
+                    <div class="product-item pic2">
+                        <img src="/dist/img/exercitation.jpg" alt="flower" />
+                    </div>
+                    <div class="product-item pic3">
+                        <img src="/dist/img/fat.jpg" alt="flower" />
+                    </div>
+                    <div class="product-item pic4">
+                        <img src="/dist/img/fhasellus.jpg" alt="flower" />
+                    </div>
+                    <div class="product-item pic5">
+                        <img src="/dist/img/florem.jpg" alt="flower" />
+                    </div>
+                    <div class="product-item pic6">
+                        <img src="/dist/img/glory.jpg" alt="flower" />
+                    </div>
+                    <div class="product-item pic7">
+                        <img src="/dist/img/pearly.jpg" alt="flower" />
+                    </div>
+                    <div class="product-item pic8">
+                        <img src="/dist/img/polka.jpg" alt="flower" />
+                    </div>
+                </div>
+            </section>
+        </div>
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"
+        ></script>
+        <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+        <script src="/dist/js/app.js"></script>
+    </body>
+</html>

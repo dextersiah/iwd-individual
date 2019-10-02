@@ -1,0 +1,32 @@
+//Color Variables
+$primary-color: #ff3d2a;
+$dark-text: #454545;
+
+@mixin easeOut {
+    transition: all 0.2s ease-in-out;
+}
+
+//Preset
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    font-family: "Rubik", sans-serif !important;
+    font-size: 14px;
+    overflow-x: hidden;
+    color: #454545;
+}
+
+a,
+a:visited,
+a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul > li {
+    list-style-type: none;
+}
