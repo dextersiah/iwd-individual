@@ -2,14 +2,27 @@
 $primary-color: #ff3d2a;
 $dark-text: #454545;
 
-@mixin easeOut {
-    transition: all 0.2s ease-in-out;
+@mixin easeInOutFast {
+    transition: all 0.1s ease-in-out;
+}
+
+@mixin easeInOutMedium {
+    transition: all 0.3s ease-in-out;
+}
+
+@mixin easeInOutSlow {
+    transition: all 0.8s ease-in-out;
 }
 
 //Preset
 * {
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth !important;
+}
+
+*:focus {
+    outline: none;
 }
 
 body {

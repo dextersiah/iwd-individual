@@ -1,6 +1,10 @@
 * {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  scroll-behavior: smooth !important; }
+
+*:focus {
+  outline: none; }
 
 body {
   margin: 0;
@@ -52,7 +56,7 @@ ul > li {
           .container header .header-section .header-menu .account-details ul li {
             line-height: 32px;
             width: 100px;
-            transition: all 0.2s ease-in-out; }
+            transition: all 0.1s ease-in-out; }
             .container header .header-section .header-menu .account-details ul li:hover {
               color: #ff3d2a; }
   .container header .header-navigation {
@@ -68,14 +72,14 @@ ul > li {
       .container header .header-navigation .nav-bar-item {
         list-style-type: none;
         padding-left: 20px;
-        transition: all 0.2s ease-in-out; }
+        transition: all 0.1s ease-in-out; }
         .container header .header-navigation .nav-bar-item:hover {
           color: #ff3d2a; }
 
 .container .hero {
   margin-top: 30px;
   position: relative;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2));
   height: 550px;
   overflow: hidden; }
   .container .hero .content {
@@ -90,7 +94,7 @@ ul > li {
     .container .hero .content > p {
       padding-top: 0.5rem;
       padding-left: 0.5rem;
-      font-size: 2rem;
+      font-size: 1.3rem;
       color: white;
       opacity: 0.4; }
     .container .hero .content > a {
@@ -100,7 +104,7 @@ ul > li {
       background: #ff9a90;
       margin: 1.5rem 0.5rem;
       color: white;
-      transition: all 0.2s ease-in-out; }
+      transition: all 0.3s ease-in-out; }
       .container .hero .content > a:hover {
         background: transparent;
         color: #ff9a90; }
@@ -108,46 +112,190 @@ ul > li {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1; }
+    z-index: -1;
+    max-width: 100%;
+    height: 100%; }
 
-.container .product-section {
-  padding: 0 10%; }
-  .container .product-section .head {
+.container #product-section {
+  padding: 5% 10%; }
+  .container #product-section .head {
     display: flex;
-    padding: 5% 0 2%;
+    padding: 0 0 2%;
     justify-content: space-between; }
-    .container .product-section .head .product-filter {
+    .container #product-section .head .product-filter {
       line-height: 2; }
-      .container .product-section .head .product-filter ul {
+      .container #product-section .head .product-filter ul {
         display: inline-flex; }
-        .container .product-section .head .product-filter ul li {
+        .container #product-section .head .product-filter ul li {
           padding-left: 1rem;
-          transition: all 0.2s ease-in-out; }
-          .container .product-section .head .product-filter ul li:hover {
+          transition: all 0.1s ease-in-out; }
+          .container #product-section .head .product-filter ul li:hover {
             color: #ff3d2a; }
-          .container .product-section .head .product-filter ul li a.active {
+          .container #product-section .head .product-filter ul li a.active {
             color: #ff3d2a; }
-  .container .product-section .product-grid {
+  .container #product-section .product-grid {
     display: grid;
     grid-template-areas: "pic1 pic2 pic3 pic4" "pic5 pic6 pic7 pic8";
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    grid-gap: 20px; }
-    .container .product-section .product-grid .product-item.pic1 {
-      grid-area: pic1; }
-    .container .product-section .product-grid .product-item.pic2 {
-      grid-area: pic2; }
-    .container .product-section .product-grid .product-item.pic3 {
-      grid-area: pic3; }
-    .container .product-section .product-grid .product-item.pic4 {
-      grid-area: pic4; }
-    .container .product-section .product-grid .product-item.pic5 {
-      grid-area: pic5; }
-    .container .product-section .product-grid .product-item.pic6 {
-      grid-area: pic6; }
-    .container .product-section .product-grid .product-item.pic7 {
-      grid-area: pic7; }
-    .container .product-section .product-grid .product-item.pic8 {
-      grid-area: pic4; }
-    .container .product-section .product-grid .product-item img {
-      width: 100%; }
+    grid-gap: 4rem 2rem; }
+    .container #product-section .product-grid .product-item {
+      position: relative;
+      z-index: 1; }
+      .container #product-section .product-grid .product-item.pic1 {
+        grid-area: pic1; }
+      .container #product-section .product-grid .product-item.pic2 {
+        grid-area: pic2; }
+      .container #product-section .product-grid .product-item.pic3 {
+        grid-area: pic3; }
+      .container #product-section .product-grid .product-item.pic4 {
+        grid-area: pic4; }
+      .container #product-section .product-grid .product-item.pic5 {
+        grid-area: pic5; }
+      .container #product-section .product-grid .product-item.pic6 {
+        grid-area: pic6; }
+      .container #product-section .product-grid .product-item.pic7 {
+        grid-area: pic7; }
+      .container #product-section .product-grid .product-item.pic8 {
+        grid-area: pic8; }
+      .container #product-section .product-grid .product-item img {
+        width: 100%; }
+      .container #product-section .product-grid .product-item .item-hover {
+        display: flex;
+        position: absolute;
+        bottom: 49px;
+        width: 100%;
+        justify-content: center;
+        padding-bottom: 0.1rem; }
+        .container #product-section .product-grid .product-item .item-hover .card-item {
+          transform: rotateY(90deg);
+          transform-origin: center;
+          padding: 0.9rem;
+          background: white;
+          margin: 0.1rem;
+          transition: all 0.3s ease-in-out; }
+          .container #product-section .product-grid .product-item .item-hover .card-item:hover {
+            background: #ff3d2a;
+            color: white; }
+      .container #product-section .product-grid .product-item:hover .item-hover .card-item {
+        transform: rotateY(180deg); }
+      .container #product-section .product-grid .product-item .info {
+        margin-top: 1rem; }
+        .container #product-section .product-grid .product-item .info p {
+          text-align: center; }
+
+.container #testimonial {
+  margin: 5% 0;
+  background: #ff9a90; }
+  .container #testimonial .content {
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 1200px;
+    min-width: 300px; }
+  .container #testimonial .slick-slider {
+    margin: 30px auto 50px; }
+  .container #testimonial .quote-container {
+    min-height: 200px;
+    color: #666666;
+    font-size: 36px;
+    margin: 0 20px;
+    position: relative; }
+    .container #testimonial .quote-container:hover {
+      cursor: grab; }
+    .container #testimonial .quote-container .portrait {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      height: 140px;
+      width: 140px;
+      border-radius: 50%;
+      overflow: hidden; }
+      .container #testimonial .quote-container .portrait img {
+        display: block;
+        height: auto;
+        width: 100%; }
+    .container #testimonial .quote-container .quote {
+      position: relative;
+      z-index: 600;
+      padding: 40px 0 40px 180px;
+      margin: 0;
+      font-size: 20px;
+      font-style: italic;
+      line-height: 1.4 !important;
+      font-family: Calibri;
+      color: white; }
+      .container #testimonial .quote-container .quote p {
+        position: relative;
+        margin-bottom: 20px; }
+        .container #testimonial .quote-container .quote p:first-child:before {
+          content: "\201C";
+          color: rgba(255, 255, 255, 0.44);
+          font-size: 7.5em;
+          font-weight: 700;
+          opacity: 1;
+          position: absolute;
+          top: -0.4em;
+          left: -0.2em;
+          text-shadow: none;
+          z-index: -10; }
+      .container #testimonial .quote-container .quote cite {
+        display: block;
+        font-size: 14px; }
+        .container #testimonial .quote-container .quote cite span {
+          font-size: 16px;
+          font-style: normal;
+          letter-spacing: 1px;
+          text-transform: uppercase; }
+  .container #testimonial .dragging .quote-container {
+    cursor: grabbing; }
+
+.container #contact {
+  background: #f6f7f7;
+  height: 40vh;
+  padding: 5% 10%; }
+  .container #contact .contact-grid {
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+    grid-template-areas: "about about info account news news"; }
+    .container #contact .contact-grid a {
+      transition: all 0.1s ease-in-out; }
+    .container #contact .contact-grid a:hover {
+      color: #ff3d2a; }
+    .container #contact .contact-grid ul {
+      padding-top: 1rem; }
+      .container #contact .contact-grid ul li {
+        padding-top: 0.6rem; }
+    .container #contact .contact-grid p {
+      padding-top: 1.5rem;
+      line-height: 1.5; }
+    .container #contact .contact-grid .about {
+      grid-area: about; }
+    .container #contact .contact-grid .more-info {
+      grid-area: info; }
+    .container #contact .contact-grid .account {
+      grid-area: account; }
+    .container #contact .contact-grid .news {
+      grid-area: news; }
+      .container #contact .contact-grid .news input {
+        background: none;
+        display: block;
+        border: none;
+        width: 100%;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid #bbb; }
+      .container #contact .contact-grid .news button {
+        margin-top: 2rem;
+        padding: 1rem 3rem;
+        border: 1px solid #ff3d2a;
+        background: #ff3d2a;
+        color: white;
+        border-radius: 0.3rem;
+        cursor: pointer;
+        transition: all 0.1s ease-in-out; }
+        .container #contact .contact-grid .news button:hover {
+          background-color: transparent;
+          color: #ff3d2a; }

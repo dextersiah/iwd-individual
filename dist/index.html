@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
         <script type="text/javascript">
             (function() {
                 var css = document.createElement("link");
@@ -14,6 +15,8 @@
                 document.getElementsByTagName("head")[0].appendChild(css);
             })();
         </script>
+
+        <!-- STYLES -->
         <link
             href="https://fonts.googleapis.com/css?family=Rubik&display=swap"
             rel="stylesheet"
@@ -22,11 +25,23 @@
             href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap"
             rel="stylesheet"
         />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+        />
+
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"
+        />
         <link rel="stylesheet" href="css/style.css" />
         <title>The Florist</title>
     </head>
     <body>
         <div class="container">
+            <!-- HEADER -->
             <header>
                 <div class="header-section">
                     <p>Welcome user</p>
@@ -62,10 +77,10 @@
                             <a href="#">HOME</a>
                         </li>
                         <li class="nav-bar-item">
-                            <a href="#">PRODUCT</a>
+                            <a href="#product-section">PRODUCT</a>
                         </li>
                         <li class="nav-bar-item">
-                            <a href="#">TESTIMONIAL</a>
+                            <a href="#testimonial">TESTIMONIAL</a>
                         </li>
                         <li class="nav-bar-item">
                             <a href="#">CONTACT</a>
@@ -73,6 +88,7 @@
                     </div>
                 </div>
             </header>
+            <!-- HERO SECTION -->
             <section class="hero-section">
                 <div class="hero">
                     <div class="content">
@@ -83,22 +99,24 @@
                     <img class="hero-img" src="/dist/img/slider-2.jpg" alt="" />
                 </div>
             </section>
-            <section class="product-section">
+
+            <!-- PRODUCT SECTION -->
+            <section id="product-section">
                 <div class="head">
                     <h2>Featured Product</h2>
                     <div class="product-filter">
-                        <ul class="filter-button-group">
+                        <ul>
                             <li>
-                                <a href="#/" data-filter="*">All</a>
+                                <a href="#/">All</a>
                             </li>
                             <li>
-                                <a href="#/" data-filter=".winter">Winter</a>
+                                <a href="#/">Winter</a>
                             </li>
                             <li>
-                                <a href="#/" data-filter=".various">Various</a>
+                                <a href="#/">Various</a>
                             </li>
                             <li>
-                                <a href="#/" data-filter=".greens">Greens</a>
+                                <a href="#/">Greens</a>
                             </li>
                         </ul>
                     </div>
@@ -106,37 +124,326 @@
                 <div class="product-grid">
                     <div class="product-item pic1">
                         <img src="/dist/img/dutchman.jpg" alt="flower" />
+                        <div class="item-hover">
+                            <div class="wishlist card-item">
+                                <a href="#/">
+                                    <i class="far fa-heart fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="cart card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-shopping-bag fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="item-details card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-search-plus fa-lg"></i
+                                ></a>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p>Glory Of The Snow</p>
+                            <p>RM99.00</p>
+                        </div>
                     </div>
                     <div class="product-item pic2">
                         <img src="/dist/img/exercitation.jpg" alt="flower" />
+                        <div class="item-hover">
+                            <div class="wishlist card-item">
+                                <a href="#/">
+                                    <i class="far fa-heart fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="cart card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-shopping-bag fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="item-details card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-search-plus fa-lg"></i
+                                ></a>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p>Jack In The Pulpit</p>
+                            <p>RM85.00</p>
+                        </div>
                     </div>
                     <div class="product-item pic3">
                         <img src="/dist/img/fat.jpg" alt="flower" />
+                        <div class="item-hover">
+                            <div class="wishlist card-item">
+                                <a href="#/">
+                                    <i class="far fa-heart fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="cart card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-shopping-bag fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="item-details card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-search-plus fa-lg"></i
+                                ></a>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p>Evergreen Candytuft</p>
+                            <p>RM105.00</p>
+                        </div>
                     </div>
                     <div class="product-item pic4">
                         <img src="/dist/img/fhasellus.jpg" alt="flower" />
+                        <div class="item-hover">
+                            <div class="wishlist card-item">
+                                <a href="#/">
+                                    <i class="far fa-heart fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="cart card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-shopping-bag fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="item-details card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-search-plus fa-lg"></i
+                                ></a>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p>Flower Bouquet Pink</p>
+                            <p>RM149.00</p>
+                        </div>
                     </div>
                     <div class="product-item pic5">
                         <img src="/dist/img/florem.jpg" alt="flower" />
+                        <div class="item-hover">
+                            <div class="wishlist card-item">
+                                <a href="#/">
+                                    <i class="far fa-heart fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="cart card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-shopping-bag fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="item-details card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-search-plus fa-lg"></i
+                                ></a>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p>Pearly Everlasting</p>
+                            <p>RM199.00</p>
+                        </div>
                     </div>
                     <div class="product-item pic6">
                         <img src="/dist/img/glory.jpg" alt="flower" />
+                        <div class="item-hover">
+                            <div class="wishlist card-item">
+                                <a href="#/">
+                                    <i class="far fa-heart fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="cart card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-shopping-bag fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="item-details card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-search-plus fa-lg"></i
+                                ></a>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p>Yellow Loosestrife</p>
+                            <p>RM79.00</p>
+                        </div>
                     </div>
                     <div class="product-item pic7">
                         <img src="/dist/img/pearly.jpg" alt="flower" />
+                        <div class="item-hover">
+                            <div class="wishlist card-item">
+                                <a href="#/">
+                                    <i class="far fa-heart fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="cart card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-shopping-bag fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="item-details card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-search-plus fa-lg"></i
+                                ></a>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p>Polka Dot Plant</p>
+                            <p>RM139.00</p>
+                        </div>
                     </div>
                     <div class="product-item pic8">
                         <img src="/dist/img/polka.jpg" alt="flower" />
+                        <div class="item-hover">
+                            <div class="wishlist card-item">
+                                <a href="#/">
+                                    <i class="far fa-heart fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="cart card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-shopping-bag fa-lg"></i
+                                ></a>
+                            </div>
+                            <div class="item-details card-item">
+                                <a href="#/"
+                                    ><i class="fas fa-search-plus fa-lg"></i
+                                ></a>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p>Florem Ipsum Dolor Sit</p>
+                            <p>RM99</p>
+                        </div>
                     </div>
                 </div>
             </section>
+
+            <!-- TESTIMONIAL SECTION -->
+            <section id="testimonial">
+                <div class="content">
+                    <div class="slider single-item">
+                        <div class="quote-container">
+                            <div class="portrait octogon">
+                                <img
+                                    alt=""
+                                    src="http://www.tuacahntech.com/uploads/6/1/7/9/6179841/6166205_orig.jpg"
+                                />
+                            </div>
+                            <div class="quote">
+                                <blockquote>
+                                    <p>
+                                        Meditation shabby chic master cleanse
+                                        banh mi Godard. Asymmetrical Wes
+                                        Anderson Intelligentsia you probably
+                                        haven't heard of them.
+                                    </p>
+                                    <cite>
+                                        <span>Kristi McSweeney</span>
+                                        <br />
+                                        Thundercats twee
+                                        <br />
+                                        Austin selvage beard
+                                    </cite>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="quote-container">
+                            <div class="portrait octogon">
+                                <img
+                                    alt=""
+                                    src="http://static1.squarespace.com/static/51579fb2e4b0fc0d9469ff97/56cc83dfe707ebc39cf3269f/56d0b59e27d4bde4665fded3/1457365822199/"
+                                />
+                            </div>
+                            <div class="quote">
+                                <blockquote>
+                                    <p>
+                                        Bespoke occupy cred seitan. Austin
+                                        street art freegan Truffaut leggings
+                                        aesthetic, salvia chia Brooklyn
+                                        flexitarian. Single-origin coffee before
+                                        they sold out health goth, cornhole
+                                        irony keffiyeh Austin taxidermy mlkshk
+                                        blog trust fund banh mi you probably
+                                        haven't heard of them.
+                                    </p>
+                                    <cite>
+                                        <span>Dina Anderson</span>
+                                        <br />
+                                        Blue Bottle keffiyeh
+                                        <br />
+                                        Sartorial locavore Schlitz ennui
+                                    </cite>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTACT -->
+            <footer id="contact">
+                <div class="contact-grid">
+                    <div class="about">
+                        <h2>About Us</h2>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing
+                            elit sed do eiusmod tempor incididun
+                        </p>
+                        <ul>
+                            <li>
+                                Address:Jalan Kontraktor U1/14, Seksyen U1
+                            </li>
+                            <li>Telephone: (03)-5565 0538</li>
+                            <li>Email: kdu-florist@kdu-edu.my</li>
+                        </ul>
+                    </div>
+                    <div class="more-info">
+                        <h2>Information</h2>
+                        <ul>
+                            <li><a href="#/">About Us</a></li>
+                            <li><a href="#/">Delivery Information</a></li>
+                            <li><a href="#/">Privacy Policy</a></li>
+                            <li><a href="#/">Terms & Conditions</a></li>
+                            <li><a href="#/">Customer Service</a></li>
+                            <li><a href="#/">Return Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="account">
+                        <h2>My Account</h2>
+                        <ul>
+                            <li><a href="#/">My Account</a></li>
+                            <li><a href="#/">Order History</a></li>
+                            <li><a href="#/">Wish List</a></li>
+                            <li><a href="#/">Newsletter</a></li>
+                            <li><a href="#/">International Orders</a></li>
+                        </ul>
+                    </div>
+                    <div class="news">
+                        <h2>Join Our Newsletter Now</h2>
+                        <p>
+                            Get E-mail updates about our latest shop and special
+                            offers.
+                        </p>
+                        <form action="#">
+                            <input
+                                type="text"
+                                placeholder="email@example.com"
+                            />
+                            <button>Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </footer>
         </div>
+        <!-- SCRIPT -->
         <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"
         ></script>
-        <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+        <script
+            type="text/javascript"
+            src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+        ></script>
         <script src="/dist/js/app.js"></script>
     </body>
 </html>

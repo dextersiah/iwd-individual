@@ -48,7 +48,7 @@
                         li {
                             line-height: 32px;
                             width: 100px;
-                            @include easeOut;
+                            @include easeInOutFast;
 
                             &:hover {
                                 color: $primary-color;
@@ -76,7 +76,7 @@
                 &-item {
                     list-style-type: none;
                     padding-left: 20px;
-                    @include easeOut;
+                    @include easeInOutFast;
 
                     &:hover {
                         color: $primary-color;
@@ -91,7 +91,7 @@
         position: relative;
         background: linear-gradient(
             90deg,
-            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.7),
             rgba(0, 0, 0, 0.2)
         );
         height: 550px;
@@ -114,7 +114,7 @@
             > p {
                 padding-top: 0.5rem;
                 padding-left: 0.5rem;
-                font-size: 2rem;
+                font-size: 1.3rem;
                 color: white;
                 opacity: 0.4;
             }
@@ -126,7 +126,7 @@
                 background: lighten($primary-color, 20);
                 margin: 1.5rem 0.5rem;
                 color: white;
-                @include easeOut;
+                @include easeInOutMedium;
 
                 &:hover {
                     background: transparent;
@@ -140,15 +140,17 @@
             top: 0;
             left: 0;
             z-index: -1;
+            max-width: 100%;
+            height: 100%;
         }
     }
 
-    .product-section {
-        padding: 0 10%;
+    #product-section {
+        padding: 5% 10%;
 
         .head {
             display: flex;
-            padding: 5% 0 2%;
+            padding: 0 0 2%;
             justify-content: space-between;
 
             .product-filter {
@@ -159,7 +161,7 @@
 
                     li {
                         padding-left: 1rem;
-                        @include easeOut;
+                        @include easeInOutFast;
                         &:hover {
                             color: $primary-color;
                         }
@@ -182,9 +184,12 @@
 
             grid-template-columns: repeat(4, 1fr);
             grid-template-rows: repeat(2, 1fr);
-            grid-gap: 20px;
+            grid-gap: 4rem 2rem;
 
             .product-item {
+                position: relative;
+                z-index: 1;
+
                 &.pic1 {
                     grid-area: pic1;
                 }
@@ -207,11 +212,215 @@
                     grid-area: pic7;
                 }
                 &.pic8 {
-                    grid-area: pic4;
+                    grid-area: pic8;
                 }
 
                 img {
                     width: 100%;
+                }
+
+                .item-hover {
+                    display: flex;
+                    position: absolute;
+                    bottom: 49px;
+                    width: 100%;
+                    justify-content: center;
+                    padding-bottom: 0.1rem;
+
+                    .card-item {
+                        transform: rotateY(90deg);
+                        transform-origin: center;
+                        padding: 0.9rem;
+                        background: white;
+                        margin: 0.1rem;
+                        @include easeInOutMedium;
+
+                        &:hover {
+                            background: $primary-color;
+                            color: white;
+                        }
+                    }
+                }
+
+                &:hover .item-hover .card-item {
+                    transform: rotateY(180deg);
+                }
+
+                .info {
+                    margin-top: 1rem;
+                    p {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+
+    #testimonial {
+        margin: 5% 0;
+        background: lighten($primary-color, 20);
+
+        .content {
+            margin: auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 1200px;
+            min-width: 300px;
+        }
+
+        .slick-slider {
+            margin: 30px auto 50px;
+        }
+
+        .quote-container {
+            min-height: 200px;
+            color: #666666;
+            font-size: 36px;
+            margin: 0 20px;
+            position: relative;
+
+            &:hover {
+                cursor: grab;
+            }
+
+            .portrait {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+
+                height: 140px;
+                width: 140px;
+                border-radius: 50%;
+                overflow: hidden;
+
+                img {
+                    display: block;
+                    height: auto;
+                    width: 100%;
+                }
+            }
+
+            .quote {
+                position: relative;
+                z-index: 600;
+                padding: 40px 0 40px 180px;
+                margin: 0;
+
+                font-size: 20px;
+                font-style: italic;
+                line-height: 1.4 !important;
+                font-family: Calibri;
+                color: white;
+
+                p {
+                    position: relative;
+                    margin-bottom: 20px;
+
+                    &:first-child:before {
+                        content: "\201C";
+                        color: rgba(255, 255, 255, 0.44);
+                        font-size: 7.5em;
+                        font-weight: 700;
+                        opacity: 1;
+                        position: absolute;
+                        top: -0.4em;
+                        left: -0.2em;
+                        text-shadow: none;
+                        z-index: -10;
+                    }
+                }
+
+                cite {
+                    display: block;
+                    font-size: 14px;
+
+                    span {
+                        font-size: 16px;
+                        font-style: normal;
+                        letter-spacing: 1px;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+        }
+
+        .dragging .quote-container {
+            cursor: grabbing;
+        }
+    }
+
+    #contact {
+        background: #f6f7f7;
+        height: 40vh;
+        padding: 5% 10%;
+
+        .contact-grid {
+            display: grid;
+            grid-gap: 2rem;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: 1fr;
+            grid-template-areas: "about about info account news news";
+
+            a {
+                @include easeInOutFast;
+            }
+
+            a:hover {
+                color: $primary-color;
+            }
+
+            ul {
+                padding-top: 1rem;
+
+                li {
+                    padding-top: 0.6rem;
+                }
+            }
+
+            p {
+                padding-top: 1.5rem;
+                line-height: 1.5;
+            }
+
+            .about {
+                grid-area: about;
+            }
+
+            .more-info {
+                grid-area: info;
+            }
+
+            .account {
+                grid-area: account;
+            }
+
+            .news {
+                grid-area: news;
+
+                input {
+                    background: none;
+                    display: block;
+                    border: none;
+                    width: 100%;
+                    padding: 0.6rem 0;
+                    border-bottom: 1px solid #bbb;
+                }
+
+                button {
+                    margin-top: 2rem;
+                    padding: 1rem 3rem;
+                    border: 1px solid $primary-color;
+                    background: $primary-color;
+                    color: white;
+                    border-radius: 0.3rem;
+                    cursor: pointer;
+                    @include easeInOutFast;
+
+                    &:hover {
+                        background-color: transparent;
+                        color: $primary-color;
+                    }
                 }
             }
         }

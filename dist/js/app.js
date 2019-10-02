@@ -1,10 +1,15 @@
-// init Isotope
-var $grid = $(".product-grid").isotope({
-    itemSelector: ".product-item",
-    layoutMode: "fitRows"
+$('.single-item').slick({
+    infinite: true,
+    dots: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    speed: 1000,
+    cssEase: 'ease-in-out',
 });
-// filter items on button click
-$(".filter-button-group").on("click", function () {
-    var filterValue = $(this).attr("data-filter");
-    $grid.isotope({ filter: filterValue });
+
+$('.quote-container').mousedown(function () {
+    $('.single-item').addClass('dragging');
+});
+$('.quote-container').mouseup(function () {
+    $('.single-item').removeClass('dragging');
 });
