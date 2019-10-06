@@ -36,6 +36,8 @@
             type="text/css"
             href="//cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css"
         />
+
+        <link rel="stylesheet" href="/dist/css/notifications.css" />
         <link rel="stylesheet" href="css/style.css" />
         <title>The Florist</title>
     </head>
@@ -44,7 +46,7 @@
             <!-- HEADER -->
             <header>
                 <div class="header-section">
-                    <p>Welcome user</p>
+                    <p id="username">Welcome user</p>
                     <div class="header-menu">
                         <ul class="account-details">
                             <li class="account-details-item">
@@ -53,19 +55,20 @@
                                 ></a>
                                 <ul>
                                     <li>
-                                        <a href="#">Register</a>
+                                        <a href="#" id="login">Login</a>
                                     </li>
                                     <li>
-                                        <a href="#">Login</a>
+                                        <a href="#" id="register">Register</a>
                                     </li>
+
                                     <li>
-                                        <a href="#">Wishlist</a>
+                                        <a href="#" id="wishlist">Wishlist</a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
                                 <i class="fas fa-shopping-cart"></i>
-                                <a href="#">RM1,000</a>
+                                <a href="#" id="totalCart"></a>
                             </li>
                         </ul>
                     </div>
@@ -88,13 +91,14 @@
                     </div>
                 </div>
             </header>
+
             <!-- HERO SECTION -->
             <section class="hero-section">
                 <div class="hero">
                     <div class="content">
                         <h1>The <span>Perfect</span> Bouquet</h1>
                         <p>Inspired By The Beauty Of Nature</p>
-                        <a href="#">Get It Now</a>
+                        <a href="#product-section">Get It Now</a>
                     </div>
                     <img class="hero-img" src="/dist/img/slider-2.jpg" alt="" />
                 </div>
@@ -135,11 +139,6 @@
                                     ><i class="fas fa-shopping-bag fa-lg"></i
                                 ></a>
                             </div>
-                            <div class="item-details card-item">
-                                <a href="#/"
-                                    ><i class="fas fa-search-plus fa-lg"></i
-                                ></a>
-                            </div>
                         </div>
                         <div class="info">
                             <p>Glory Of The Snow</p>
@@ -157,11 +156,6 @@
                             <div class="cart card-item">
                                 <a href="#/"
                                     ><i class="fas fa-shopping-bag fa-lg"></i
-                                ></a>
-                            </div>
-                            <div class="item-details card-item">
-                                <a href="#/"
-                                    ><i class="fas fa-search-plus fa-lg"></i
                                 ></a>
                             </div>
                         </div>
@@ -183,11 +177,6 @@
                                     ><i class="fas fa-shopping-bag fa-lg"></i
                                 ></a>
                             </div>
-                            <div class="item-details card-item">
-                                <a href="#/"
-                                    ><i class="fas fa-search-plus fa-lg"></i
-                                ></a>
-                            </div>
                         </div>
                         <div class="info">
                             <p>Evergreen Candytuft</p>
@@ -205,11 +194,6 @@
                             <div class="cart card-item">
                                 <a href="#/"
                                     ><i class="fas fa-shopping-bag fa-lg"></i
-                                ></a>
-                            </div>
-                            <div class="item-details card-item">
-                                <a href="#/"
-                                    ><i class="fas fa-search-plus fa-lg"></i
                                 ></a>
                             </div>
                         </div>
@@ -231,11 +215,6 @@
                                     ><i class="fas fa-shopping-bag fa-lg"></i
                                 ></a>
                             </div>
-                            <div class="item-details card-item">
-                                <a href="#/"
-                                    ><i class="fas fa-search-plus fa-lg"></i
-                                ></a>
-                            </div>
                         </div>
                         <div class="info">
                             <p>Pearly Everlasting</p>
@@ -253,11 +232,6 @@
                             <div class="cart card-item">
                                 <a href="#/"
                                     ><i class="fas fa-shopping-bag fa-lg"></i
-                                ></a>
-                            </div>
-                            <div class="item-details card-item">
-                                <a href="#/"
-                                    ><i class="fas fa-search-plus fa-lg"></i
                                 ></a>
                             </div>
                         </div>
@@ -279,11 +253,6 @@
                                     ><i class="fas fa-shopping-bag fa-lg"></i
                                 ></a>
                             </div>
-                            <div class="item-details card-item">
-                                <a href="#/"
-                                    ><i class="fas fa-search-plus fa-lg"></i
-                                ></a>
-                            </div>
                         </div>
                         <div class="info">
                             <p>Polka Dot Plant</p>
@@ -301,11 +270,6 @@
                             <div class="cart card-item">
                                 <a href="#/"
                                     ><i class="fas fa-shopping-bag fa-lg"></i
-                                ></a>
-                            </div>
-                            <div class="item-details card-item">
-                                <a href="#/"
-                                    ><i class="fas fa-search-plus fa-lg"></i
                                 ></a>
                             </div>
                         </div>
@@ -385,15 +349,21 @@
                     <div class="about">
                         <h2>About Us</h2>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit sed do eiusmod tempor incididun
+                            With a busy life, you may sacrifice the time to
+                            accompany your love, families, and friends, but you
+                            never forget them. The Florist in PJ are helping you
+                            to deliver the flowers and wishes to them during
+                            birthday, anniversary, graduation and any occasions.
                         </p>
                         <ul>
                             <li>
-                                Address:Jalan Kontraktor U1/14, Seksyen U1
+                                <strong>Address:</strong> Jalan Kontraktor
+                                U1/14, Seksyen U1
                             </li>
-                            <li>Telephone: (03)-5565 0538</li>
-                            <li>Email: kdu-florist@kdu-edu.my</li>
+                            <li><strong>Telephone:</strong> (03)-5565 0538</li>
+                            <li>
+                                <strong>Email:</strong> kdu-florist@kdu-edu.my
+                            </li>
                         </ul>
                     </div>
                     <div class="more-info">
@@ -433,8 +403,164 @@
                     </div>
                 </div>
             </footer>
+
+            <!-- Add To Cart Modal -->
+            <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                    <div
+                        class="modal__container__50vw"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="modal-1-title"
+                    >
+                        <header class="modal__header">
+                            <h2 class="modal__title" id="modal-1-title">
+                                Micromodal
+                            </h2>
+                            <button
+                                class="modal__close"
+                                aria-label="Close modal"
+                                data-micromodal-close
+                            ></button>
+                        </header>
+                        <main class="modal__content" id="modal-1-content">
+                            <p>
+                                Try hitting the <code>tab</code> key and notice
+                                how the focus stays within the modal itself.
+                                Also, <code>esc</code> to close modal.
+                            </p>
+                        </main>
+                        <footer class="modal__footer">
+                            <button class="modal__btn modal__btn-primary">
+                                Continue
+                            </button>
+                            <button
+                                class="modal__btn"
+                                data-micromodal-close
+                                aria-label="Close this dialog window"
+                            >
+                                Close
+                            </button>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Modal -->
+            <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                    <div
+                        class="modal__container__30vw"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="modal-2-title"
+                    >
+                        <header class="modal__header">
+                            <h2 class="modal__title" id="modal-2-title">
+                                🔒 Login
+                            </h2>
+                            <button
+                                class="modal__close"
+                                aria-label="Close modal"
+                                data-micromodal-close
+                            ></button>
+                        </header>
+                        <main class="modal__content" id="modal-2-content">
+                            <div id="login__form">
+                                <label for="username"
+                                    ><strong>Username</strong></label
+                                >
+                                <input type="text" id="loginUsername" />
+                                <label for="password"
+                                    ><strong>Password</strong
+                                    ><span> (required)</span></label
+                                >
+                                <input type="password" id="loginPassword" />
+                                <p
+                                    id="errorLogin"
+                                    style="padding-top: .5rem;color:red;"
+                                ></p>
+                            </div>
+                        </main>
+                        <footer class="modal__footer">
+                            <button
+                                id="btnLogin"
+                                class="modal__btn modal__btn-primary"
+                            >
+                                Login
+                            </button>
+                            <button
+                                id="register-btn"
+                                class="modal__btn"
+                                data-micromodal-close
+                                aria-label="Close this dialog window"
+                            >
+                                Close
+                            </button>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Register Modal -->
+            <div class="modal micromodal-slide" id="modal-3" aria-hidden="true">
+                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                    <div
+                        class="modal__container__30vw"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="modal-3-title"
+                    >
+                        <header class="modal__header">
+                            <h2 class="modal__title" id="modal-3-title">
+                                🔒 Register
+                            </h2>
+                            <button
+                                class="modal__close"
+                                aria-label="Close modal"
+                                data-micromodal-close
+                            ></button>
+                        </header>
+                        <main class="modal__content" id="modal-3-content">
+                            <div id="login__form">
+                                <label for="username"
+                                    ><strong>Username</strong></label
+                                >
+                                <input type="text" id="registerUsername" />
+                                <label for="password"
+                                    ><strong>Password</strong
+                                    ><span> (required)</span></label
+                                >
+                                <input type="password" id="registerPassword" />
+                                <p
+                                    id="errorRegister"
+                                    style="padding-top: .5rem;color:red"
+                                    ;
+                                ></p>
+                            </div>
+                        </main>
+                        <footer class="modal__footer">
+                            <button
+                                id="btnRegister"
+                                class="modal__btn modal__btn-primary"
+                            >
+                                Register
+                            </button>
+                            <button
+                                id="register-btn"
+                                class="modal__btn"
+                                data-micromodal-close
+                                aria-label="Close this dialog window"
+                            >
+                                Close
+                            </button>
+                        </footer>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- SCRIPT -->
+        <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
         <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -444,6 +570,7 @@
             type="text/javascript"
             src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
         ></script>
+        <script src="/dist/js/notifications.js"></script>
         <script src="/dist/js/app.js"></script>
     </body>
 </html>
