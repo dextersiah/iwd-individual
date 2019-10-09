@@ -1,5 +1,6 @@
 //Color Variables
 $primary-color: #ff3d2a;
+$lighten-primary: lighten($primary-color, 20%);
 $dark-text: #454545;
 $light-line: #ededed;
 

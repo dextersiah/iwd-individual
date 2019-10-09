@@ -11,7 +11,6 @@ const UICtrl = (function () {
         //Open Modal
         wishlist: '.wishlist',
         cart: '.cart',
-        moreDetails: '.item-details',
 
         //Get Product Info
         productName: '.info p:nth-child(1)',
@@ -42,7 +41,17 @@ const UICtrl = (function () {
         errorRegister: '#errorRegister',
 
         //Cart Price
-        totalCart: '#totalCart'
+        totalCart: '#totalCart',
+
+        //Modal Product Items
+        modalPicture: '#showPicture',
+        modalName: '#showName',
+        modalPrice: '#showPrice',
+
+        //Modal Increment Value
+        circleBtn: '.circleBtn',
+        quantity: '#quantity',
+
     }
 
     //Public Method to Access Private Methods/Data
@@ -123,6 +132,22 @@ const UICtrl = (function () {
             document.querySelector(UISelector.totalCart).innerHTML = `RM${total}`;
         },
 
+        setModalInformation: function (price, name, picture) {
+            document.querySelector(UISelector.modalPrice).innerHTML = price;
+            document.querySelector(UISelector.modalName).innerHTML = name;
+            document.querySelector(UISelector.modalPicture).src = picture;
+        },
+
+        recomputeProductQuantity: function (increment) {
+
+            if (increment == "add") {
+                document.querySelector(UISelector.quantity).value++;
+
+            } else {
+                document.querySelector(UISelector.quantity).value--;
+            }
+        },
+
     }
 })();
 
@@ -193,6 +218,34 @@ const StorageCtrl = (function () {
         removeCurrentUserFromStorage: function () {
             localStorage.removeItem('currentUser');
         },
+
+        loadFlowersToStorage: function () {
+            let flowers, flower;
+
+            if (localStorage.getItem('flowers') === null) {
+
+                //Check if any flowers in ls
+                flowers = [];
+
+                flower = [
+                    { id: 1, name: "Glory Of The Snow", price: 99 },
+                    { id: 2, name: "Jack In the Pulpit", price: 85 },
+                    { id: 3, name: "Evergreen Candytuft", price: 105 },
+                    { id: 4, name: "Flower Bouquet Pink", price: 149 },
+                    { id: 5, name: "Pearly Everlasting", price: 199 },
+                    { id: 6, name: "Yellow Loosestrife", price: 79 },
+                    { id: 7, name: "Polka Dot Plant", price: 139 },
+                    { id: 8, name: "Florem Upsum Dolor Sit", price: 99 }
+
+                ];
+                //Push new user
+                flowers.push(flower);
+
+                //Set ls
+                localStorage.setItem('flowers', JSON.stringify(flowers));
+            }
+
+        }
     }
 
 })();
@@ -299,11 +352,6 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
             div.addEventListener('click', addProductCart)
         });
 
-        //Add To Product Details Event
-        document.querySelectorAll(UISelector.moreDetails).forEach(div => {
-            div.addEventListener('click', viewProductDetails);
-        });
-
         //Add Login Modal Event
         document.querySelector(UISelector.login).addEventListener('click', e => {
 
@@ -331,33 +379,38 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
         document.querySelector(UISelector.btnLogin).addEventListener('click', loginUser);
 
         //Add Register Event
-        document.querySelector(UISelector.btnRegister).addEventListener('click', registerUser)
+        document.querySelector(UISelector.btnRegister).addEventListener('click', registerUser);
+
+        //Increment Value
+        document.querySelectorAll(UISelector.circleBtn).forEach(item => {
+            item.addEventListener('click', incrementValue);
+        });
     }
 
     const addProductWishlist = function (e) {
 
-        let name = e.target.parentNode.parentNode.parentNode.nextElementSibling.firstElementChild.innerHTML;
-        let price = e.target.parentNode.parentNode.parentNode.nextElementSibling.lastElementChild.innerHTML;
+        StorageCtrl.loadFlowersToStorage();
 
-        console.log(`${name} ${price}`);
-
-        MicroModal.show('modal-1');
         e.preventDefault();
     }
 
     const addProductCart = function (e) {
 
-        console.log("cart")
+        //Get Data From Clicked Item
+        let name = e.target.parentNode.parentNode.parentNode.nextElementSibling.firstElementChild.innerHTML;
+        let price = e.target.parentNode.parentNode.parentNode.nextElementSibling.lastElementChild.innerHTML;
+        let picture = e.target.parentNode.parentNode.parentNode.parentNode.firstElementChild.src;
+
+        //Set Item To Modal
+        UICtrl.setModalInformation(price, name, picture);
+
+
+        //Open Modal
+        MicroModal.show('modal-1');
 
         e.preventDefault();
     }
 
-    const viewProductDetails = function (e) {
-
-        console.log("details")
-
-        e.preventDefault();
-    }
 
     const loginUser = function (e) {
 
@@ -440,10 +493,22 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
         e.preventDefault();
     }
 
+    const incrementValue = function (e) {
+
+        const list = e.target.parentNode.classList;
+
+        if (list.contains('plus')) {
+            UICtrl.recomputeProductQuantity("add")
+
+        } else {
+            UICtrl.recomputeProductQuantity("minus")
+        }
+    }
+
     return {
         init: function () {
 
-            //Load Even Listener
+            //Load Event Listener
             loadEvenListener();
         }
     }
