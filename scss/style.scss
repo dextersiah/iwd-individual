@@ -485,19 +485,20 @@
         .modal__container__50vw {
             background-color: #fff;
             width: 50vw;
-            max-height: 100vh;
+            max-height: 85vh;
             border-radius: 4px;
-            overflow-y: auto;
             box-sizing: border-box;
         }
 
         .modal__container__30vw {
             background-color: #fff;
             width: 32vw;
-            max-height: 100vh;
+            max-height: 85vh;
             border-radius: 4px;
-            overflow-y: auto;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            overflow-y: hidden;
         }
     }
 
@@ -534,6 +535,71 @@
         line-height: 1.5;
         color: rgba(0, 0, 0, 0.8);
 
+        .circleBtn {
+            background: $light-line;
+            width: 25px;
+            height: 30px;
+            box-sizing: border-box;
+            border-radius: 1px;
+            cursor: pointer;
+        }
+
+        .fas {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            color: black;
+            font-size: 10px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+            border: none;
+            width: 20px;
+            text-align: center;
+
+            &:disabled {
+                background-color: initial;
+            }
+        }
+
+        #checkoutTable {
+            vertical-align: top;
+            width: 100%;
+            max-width: 100%;
+            white-space: nowrap;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        .quantity-box {
+            display: flex;
+            justify-content: center;
+        }
+
+        th {
+            text-transform: capitalize;
+            background: #ededed;
+        }
+
+        tr {
+            border-bottom: 5px solid $light-line;
+        }
+
+        th,
+        td {
+            padding: 1rem 0 1rem;
+            text-align: center;
+        }
+
+        .table__img {
+            width: 70px;
+        }
+
         .productModal {
             display: flex;
 
@@ -568,65 +634,8 @@
 
                 .amount {
                     display: flex;
-
-                    .circleBtn {
-                        background: red;
-                        width: 21px;
-                        height: 21px;
-                        box-sizing: border-box;
-                        border-radius: 3px;
-                        cursor: pointer;
-                    }
-
-                    .fas {
-                        width: 100%;
-                        height: 100%;
-                        text-align: center;
-                        color: white;
-                        font-size: 10px;
-                        box-sizing: border-box;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                    }
-
-                    input[type="number"] {
-                        -moz-appearance: textfield;
-                        border: none;
-                        width: 20px;
-                        text-align: center;
-
-                        &:disabled {
-                            background-color: initial;
-                        }
-                    }
                 }
             }
-        }
-
-        .modal__btn {
-            border: 1px solid $primary-color;
-            padding: 0.8rem 1.6rem;
-            cursor: pointer;
-            @include easeInOutFast;
-
-            &:active {
-                transform: scale(0.9);
-            }
-        }
-
-        .modal__btn-primary {
-            background-color: $primary-color;
-            color: white;
-
-            &:active {
-                transform: scale(0.9);
-            }
-        }
-
-        .modal__btn-secondary {
-            background-color: initial;
-            color: $primary-color;
         }
 
         #login__form {
@@ -646,6 +655,52 @@
                 margin-top: 0.5rem;
                 border: 1px solid rgba(0, 0, 0, 0.3);
             }
+        }
+    }
+
+    .modal__btn {
+        border: 1px solid $primary-color;
+        padding: 0.9rem 1.6rem;
+        cursor: pointer;
+        font-size: 14.5px;
+        min-width: 140px;
+        @include easeInOutFast;
+
+        &:active {
+            transform: scale(0.9);
+        }
+    }
+
+    .modal__btn-primary {
+        background-color: $primary-color;
+        color: white;
+
+        &:active {
+            transform: scale(0.9);
+        }
+    }
+
+    .modal__btn-secondary {
+        background-color: initial;
+        color: $primary-color;
+    }
+
+    .modal__footer {
+        padding: 0 30px 30px;
+
+        .checkoutBtn {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        h2 {
+            width: 100%;
+            text-align: end;
+            margin-bottom: 15px;
+        }
+
+        #totalPrice {
+            font-weight: lighter;
         }
     }
 

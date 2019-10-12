@@ -12,10 +12,6 @@ const UICtrl = (function () {
         wishlist: '.wishlist',
         cart: '.cart',
 
-        //Get Product Info
-        productName: '.info p:nth-child(1)',
-        productPrice: '.info p:nth-child(2)',
-
         //Open Modal
         register: '#register',
         login: '#login',
@@ -40,7 +36,7 @@ const UICtrl = (function () {
         errorLogin: '#errorLogin',
         errorRegister: '#errorRegister',
 
-        //Cart Price
+        //Cart Price Home Page
         totalCart: '#totalCart',
 
         //Modal Product Items
@@ -48,10 +44,20 @@ const UICtrl = (function () {
         modalName: '#showName',
         modalPrice: '#showPrice',
 
-        //Modal Increment Value
-        circleBtn: '.circleBtn',
         quantity: '#quantity',
+        cartQuantity: '#cart_quantity',
 
+        //Add To Cart Modal Button
+        addToCart: '#addToCart',
+
+        //Modal 1
+        modalCart: '#modal-1',
+
+        //Cart Table
+        checkoutTable: '#checkoutTable',
+
+        //Table body
+        tableBody: '#table-body',
     }
 
     //Public Method to Access Private Methods/Data
@@ -60,13 +66,6 @@ const UICtrl = (function () {
         //Get Selectors
         getSelectors: function () {
             return UISelector;
-        },
-
-        getFlowerDetails: function () {
-            return {
-                name: document.querySelector(UISelector.productName).innerHTML,
-                price: document.querySelector(UISelector.productPrice).innerHTML
-            }
         },
 
         getLoginInput: function () {
@@ -88,7 +87,7 @@ const UICtrl = (function () {
             window.createNotification({
                 closeOnClick: true,
                 displayCloseButton: false,
-                positionClass: "nfc-top-right",
+                positionClass: "nfc-bottom-right",
                 showDuration: 1500,
                 theme: theme
             })({
@@ -116,7 +115,6 @@ const UICtrl = (function () {
             } else {
                 document.querySelector(UISelector.username).innerHTML = `Welcome user`;
                 document.querySelector(UISelector.login).innerHTML = 'Login';
-
             }
         },
 
@@ -129,13 +127,24 @@ const UICtrl = (function () {
         },
 
         setTotalCart: function (total) {
-            document.querySelector(UISelector.totalCart).innerHTML = `RM${total}`;
+            document.querySelector(UISelector.totalCart).innerHTML = total;
         },
 
-        setModalInformation: function (price, name, picture) {
+        setModalInformation: function (id, price, name, picture) {
             document.querySelector(UISelector.modalPrice).innerHTML = price;
             document.querySelector(UISelector.modalName).innerHTML = name;
             document.querySelector(UISelector.modalPicture).src = picture;
+            document.querySelector(UISelector.modalCart).dataset.product = id;
+        },
+
+        getModalInformation: function () {
+            return {
+                "id": document.querySelector(UISelector.modalCart).dataset.product,
+                "product name": document.querySelector(UISelector.modalName).innerHTML,
+                "total": document.querySelector(UISelector.modalPrice).innerHTML,
+                "image": document.querySelector(UISelector.modalPicture).src,
+                "quantity": document.querySelector(UISelector.quantity).value
+            }
         },
 
         recomputeProductQuantity: function (increment) {
@@ -148,8 +157,156 @@ const UICtrl = (function () {
             }
         },
 
+        loadCartTableHead: function (table, data) {
+
+            let thead = table.createTHead();
+            let row = thead.insertRow();
+            for (let key of data) {
+                if (key == "id") continue;
+                let th = document.createElement("th");
+                let text = document.createTextNode(key);
+
+                if (key == "name") {
+                    text = document.createTextNode("Product Name");
+                } else if (key == "src") {
+                    text = document.createTextNode("Image");
+                }
+
+                th.appendChild(text);
+                row.appendChild(th);
+            }
+        },
+
+        sortObjKeysAlphabetically: function (obj) {
+            let ordered = {};
+            Object.keys(obj).sort().forEach(function (key) {
+                ordered[key] = obj[key];
+            });
+            return ordered;
+        },
+
+        loadCartTableData: function (table, data) {
+
+            let subTotal = 0;
+
+
+            data.forEach(element => {
+
+                const row = table.insertRow();
+
+                let sortElement = UICtrl.sortObjKeysAlphabetically(element)
+
+                for (key in sortElement) {
+
+                    if (key == "id") continue;
+                    const cell = row.insertCell();
+                    const text = document.createTextNode(element[key]);
+
+
+
+                    if (key == "image") {
+                        const img = document.createElement('img');
+                        img.className = 'table__img';
+                        img.src = element[key];
+                        cell.appendChild(img);
+                    } else if (key == "quantity") {
+
+                        //Create Quantity Box
+                        const quantityBox = document.createElement('div');
+                        quantityBox.className = "quantity-box";
+
+                        //Create circleBtn(minus)
+                        const circleBtnMinus = document.createElement('div');
+                        circleBtnMinus.classList.add('minus');
+                        circleBtnMinus.classList.add('circleBtn');
+
+                        //Create circleBtn(plus)
+                        const circleBtnPlus = document.createElement('div');
+                        circleBtnPlus.classList.add('minus');
+                        circleBtnPlus.classList.add('circleBtn');
+
+                        //Create circleBtn(delete)
+                        const circleBtnDelete = document.createElement('div');
+                        circleBtnDelete.classList.add('delete');
+                        circleBtnDelete.classList.add('circleBtn');
+                        circleBtnDelete.style.backgroundColor = "red";
+                        circleBtnDelete.dataset.deleteItem = element.id;
+
+                        //Create Icon Down
+                        const fontIconMinus = document.createElement('i');
+                        fontIconMinus.classList.add('fas');
+                        fontIconMinus.classList.add('fa-chevron-down');
+
+                        //Create Icon Up
+                        const fontIconPlus = document.createElement('i');
+                        fontIconPlus.classList.add('fas');
+                        fontIconPlus.classList.add('fa-chevron-up');
+
+                        //Create Icon Times
+                        const fontIconTrash = document.createElement('i');
+                        fontIconTrash.classList.add('fas');
+                        fontIconTrash.classList.add('fa-times');
+                        fontIconTrash.style.color = "white";
+
+                        //Create Input
+                        const numberInput = document.createElement('input');
+
+                        //Set Attribute
+                        numberInput.id = "quantity";
+                        numberInput.setAttribute("type", "number");
+                        numberInput.setAttribute("value", element[key]);
+                        numberInput.disabled = true;
+                        numberInput.style.fontWeight = "bold";
+
+                        //Append Icon To Parent Div
+                        circleBtnMinus.appendChild(fontIconMinus);
+                        circleBtnPlus.appendChild(fontIconPlus);
+                        circleBtnDelete.appendChild(fontIconTrash);
+
+                        quantityBox.appendChild(circleBtnMinus);
+                        quantityBox.appendChild(numberInput);
+                        quantityBox.appendChild(circleBtnPlus);
+                        quantityBox.appendChild(circleBtnDelete);
+                        cell.appendChild(quantityBox);
+
+
+                    } else if (key == "total") {
+
+                        const price = parseInt(element.total.substr(2, 3));
+                        const quantity = parseInt(element.quantity);
+                        const total = price * quantity;
+                        subTotal += parseInt(total);
+
+                        cell.appendChild(document.createTextNode(`RM${total}.00`));
+
+                    } else {
+                        cell.appendChild(text);
+                    }
+                }
+
+            });
+
+            //Create Total Price
+            const totalPrice = document.createElement('h2');
+            const strong = document.createElement('strong');
+            const span = document.createElement('span');
+
+            //Set Attr
+            span.id = "totalPrice";
+            span.textContent = `RM${subTotal}.00`;
+            strong.textContent = 'Total:';
+
+            //Append
+            totalPrice.appendChild(strong);
+            totalPrice.appendChild(span);
+
+            document.querySelector('#cartFooter').insertBefore(totalPrice, document.querySelector('.checkoutBtn'));
+
+
+        },
     }
 })();
+
 
 //Storage Controller
 const StorageCtrl = (function () {
@@ -219,32 +376,85 @@ const StorageCtrl = (function () {
             localStorage.removeItem('currentUser');
         },
 
-        loadFlowersToStorage: function () {
-            let flowers, flower;
+        addProductToUser: function (userID, product) {
+            let users = JSON.parse(localStorage.getItem('users'));
 
-            if (localStorage.getItem('flowers') === null) {
+            users.forEach(user => {
+                let flowerArray;
 
-                //Check if any flowers in ls
-                flowers = [];
+                if (user.id == userID) {
+                    if ('flowers' in user) {
+                        flowerArray = user.flowers;
 
-                flower = [
-                    { id: 1, name: "Glory Of The Snow", price: 99 },
-                    { id: 2, name: "Jack In the Pulpit", price: 85 },
-                    { id: 3, name: "Evergreen Candytuft", price: 105 },
-                    { id: 4, name: "Flower Bouquet Pink", price: 149 },
-                    { id: 5, name: "Pearly Everlasting", price: 199 },
-                    { id: 6, name: "Yellow Loosestrife", price: 79 },
-                    { id: 7, name: "Polka Dot Plant", price: 139 },
-                    { id: 8, name: "Florem Upsum Dolor Sit", price: 99 }
+                        flowerArray.forEach((flower, index) => {
+                            if (flower.id == product.id) {
+                                product.quantity = parseInt(product.quantity) + parseInt(flower.quantity);
+                                flowerArray.splice(index, 1);
+                            }
+                        });
 
-                ];
-                //Push new user
-                flowers.push(flower);
+                    } else {
+                        flowerArray = [];
+                    }
 
-                //Set ls
-                localStorage.setItem('flowers', JSON.stringify(flowers));
-            }
+                    flowerArray.push(product)
+                    user.flowers = flowerArray;
+                };
+            });
 
+            localStorage.setItem('users', JSON.stringify(users));
+        },
+
+        clearCart: function () {
+            let users = JSON.parse(localStorage.getItem('users'));
+            let currentUser = UserCtrl.getCurrentLoginUser();
+
+            users.forEach(user => {
+                if (user.id == currentUser.id) {
+                    delete user.flowers;
+                }
+            });
+
+            localStorage.setItem('users', JSON.stringify(users));
+        },
+
+        removeItemFromCart: function (id) {
+            let users = JSON.parse(localStorage.getItem('users'));
+            let currentUser = UserCtrl.getCurrentLoginUser();
+
+            users.forEach(user => {
+                if (user.id == currentUser.id) {
+                    let flowerToDelete = user.flowers;
+
+                    flowerToDelete.forEach((flower, index) => {
+                        if (flower.id == id) {
+                            flowerToDelete.splice(index, 1);
+                        }
+                    });
+                }
+            });
+
+            localStorage.setItem('users', JSON.stringify(users));
+        },
+
+        recomputeTotalPrice: function () {
+            let users = JSON.parse(localStorage.getItem('users'));
+            let currentUser = UserCtrl.getCurrentLoginUser();
+            let total = 0;
+            let userFlowers
+
+            users.forEach(user => {
+                if (user.id == currentUser.id) {
+                    if ('flowers' in user) {
+                        userFlowers = user.flowers;
+                        userFlowers.forEach(flower => {
+                            let flowerNumeric = flower.total.substr(2, 3)
+                            total += (parseInt(flowerNumeric) * parseInt(flower.quantity));
+                        });
+                    }
+                }
+            });
+            return total;
         }
     }
 
@@ -254,12 +464,11 @@ const StorageCtrl = (function () {
 const UserCtrl = (function () {
 
     //User Constructor
-    const User = function (id, username, password, totalCart) {
+    const User = function (id, username, password) {
 
         this.id = id;
         this.username = username;
         this.password = password;
-        this.totalCart = totalCart;
     }
 
     const data = {
@@ -282,7 +491,7 @@ const UserCtrl = (function () {
             }
 
             //Craete New User Object
-            newUser = new User(ID, user, passwd, 0);
+            newUser = new User(ID, user, passwd);
 
             //Add To Users Array
             data.users.push(newUser);
@@ -313,7 +522,8 @@ const UserCtrl = (function () {
 
         logoffUser: function () {
             data.currentLoginUser = null;
-        }
+        },
+
 
     }
 
@@ -334,9 +544,15 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
 
             if (currentUser.length !== 0) {
                 currentUser.forEach(user => {
+
+                    //Set Current Login
                     UserCtrl.setCurrentLoginUser(user);
+
+                    //Set To Logout
                     UICtrl.setAccountState(true, user.username);
-                    UICtrl.setTotalCart(user.totalCart);
+
+                    //Set Total Cart Price
+                    loadTotalCartPrice();
                 })
             }
 
@@ -347,28 +563,13 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
             div.addEventListener('click', addProductWishlist);
         });
 
-        //Add To Cart Event
+        //Add To Cart Event Modal
         document.querySelectorAll(UISelector.cart).forEach(div => {
-            div.addEventListener('click', addProductCart)
+            div.addEventListener('click', openProductModal);
         });
 
         //Add Login Modal Event
-        document.querySelector(UISelector.login).addEventListener('click', e => {
-
-            const currentUser = UserCtrl.getCurrentLoginUser();
-            if (currentUser) {
-
-                //Logout
-                UICtrl.setAccountState(false, "");
-                UserCtrl.logoffUser();
-                StorageCtrl.removeCurrentUserFromStorage();
-                UICtrl.createNotification("Bye", "See You Again", "warning");
-            } else {
-
-                //Login
-                MicroModal.show('modal-2');
-            }
-        });
+        document.querySelector(UISelector.login).addEventListener('click', openLoginModal);
 
         //Add Register Modal Event
         document.querySelector(UISelector.register).addEventListener('click', e => {
@@ -381,29 +582,53 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
         //Add Register Event
         document.querySelector(UISelector.btnRegister).addEventListener('click', registerUser);
 
-        //Increment Value
-        document.querySelectorAll(UISelector.circleBtn).forEach(item => {
-            item.addEventListener('click', incrementValue);
-        });
+        //Add Flower To Cart Event
+        document.querySelector(UISelector.addToCart).addEventListener('click', addProductCart);
+
+        //Open Total Cart Modal
+        document.querySelector(UISelector.totalCart).addEventListener('click', openCartModal);
+
+        //Event Delegation
+        document.body.addEventListener('click', modalIncrement);
+
     }
 
-    const addProductWishlist = function (e) {
+    //Increment Value
+    const modalIncrement = function (e) {
 
-        StorageCtrl.loadFlowersToStorage();
+
+        const target = e.target.parentNode;
+
+        if (e.target.parentNode.classList.contains('circleBtn')) {
+
+            incrementValue(e);
+
+        }
 
         e.preventDefault();
     }
 
-    const addProductCart = function (e) {
+    //MODALS
+    const openCartModal = function () {
+        if (UserCtrl.getCurrentLoginUser() !== null) {
+            loadTableData();
+            MicroModal.show('modal-4');
+        } else {
+
+            MicroModal.show('modal-2');
+        }
+    }
+
+    const openProductModal = function (e) {
 
         //Get Data From Clicked Item
+        let id = e.target.parentNode.parentNode.parentNode.nextElementSibling.dataset.id;
         let name = e.target.parentNode.parentNode.parentNode.nextElementSibling.firstElementChild.innerHTML;
         let price = e.target.parentNode.parentNode.parentNode.nextElementSibling.lastElementChild.innerHTML;
         let picture = e.target.parentNode.parentNode.parentNode.parentNode.firstElementChild.src;
 
         //Set Item To Modal
-        UICtrl.setModalInformation(price, name, picture);
-
+        UICtrl.setModalInformation(id, price, name, picture);
 
         //Open Modal
         MicroModal.show('modal-1');
@@ -411,6 +636,52 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
         e.preventDefault();
     }
 
+    const openLoginModal = function () {
+        const currentUser = UserCtrl.getCurrentLoginUser();
+        if (currentUser) {
+
+            //Logout
+            UICtrl.setAccountState(false, "");
+            UserCtrl.logoffUser();
+            UICtrl.setTotalCart("0");
+            StorageCtrl.removeCurrentUserFromStorage();
+            UICtrl.createNotification("Bye", "See You Again", "warning");
+        } else {
+
+            //Login
+            MicroModal.show('modal-2');
+        }
+    }
+
+    const loadTotalCartPrice = function () {
+        const total = StorageCtrl.recomputeTotalPrice()
+
+        UICtrl.setTotalCart(`RM${total}`);
+    }
+
+    //Computations
+    const addProductWishlist = function () {
+
+
+    }
+
+    const addProductCart = function (e) {
+
+        if (UserCtrl.getCurrentLoginUser() !== null) {
+            const user = UserCtrl.getCurrentLoginUser().id;
+            const productInfo = UICtrl.getModalInformation();
+
+            StorageCtrl.addProductToUser(user, productInfo);
+            loadTotalCartPrice();
+            MicroModal.close('modal-1');
+        } else {
+            MicroModal.close('modal-1');
+            MicroModal.show('modal-2');
+        }
+
+
+        e.preventDefault();
+    }
 
     const loginUser = function (e) {
 
@@ -436,7 +707,7 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
                 StorageCtrl.setCurrentUserFromStorage(users);
 
                 //Set Total Cart Price
-                UICtrl.setTotalCart(users.totalCart);
+                loadTotalCartPrice();
 
                 //Close Modal
                 MicroModal.close('modal-2');
@@ -463,8 +734,6 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
         const input = UICtrl.getRegisterInput();
         const users = UserCtrl.getUserByUsername(input.username);
 
-
-
         if (input.username !== '' && input.password != '') {
 
             if (!users) {
@@ -487,7 +756,7 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
             }
 
         } else {
-            console.log('input empty');
+            UICtrl.setErrorLoginMsg("Input Must Not Be Empty");
         }
 
         e.preventDefault();
@@ -505,11 +774,36 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
         }
     }
 
+    const loadTableData = function () {
+
+
+
+
+        const UISelector = UICtrl.getSelectors();
+        const userFromStorage = JSON.parse(localStorage.getItem('users'));
+        const currentUser = UserCtrl.getCurrentLoginUser();
+
+        const userFromId = userFromStorage
+            .filter(userFromStorage => userFromStorage.id == currentUser.id)
+            .map(userFlower => userFlower.flowers);
+
+
+        let table = document.querySelector(UISelector.checkoutTable);
+        table.innerHTML = '';
+        let keyHeader = userFromId[0][0];
+        let allData = userFromId[0];
+        let data = Object.keys(UICtrl.sortObjKeysAlphabetically(keyHeader));
+
+        UICtrl.loadCartTableData(table, allData);
+        UICtrl.loadCartTableHead(table, data);
+    }
+
     return {
         init: function () {
 
             //Load Event Listener
             loadEvenListener();
+
         }
     }
 })(UICtrl, StorageCtrl, UserCtrl);

@@ -140,7 +140,7 @@
                                 ></a>
                             </div>
                         </div>
-                        <div class="info">
+                        <div class="info" data-id="1">
                             <p>Glory Of The Snow</p>
                             <p>RM99.00</p>
                         </div>
@@ -159,7 +159,7 @@
                                 ></a>
                             </div>
                         </div>
-                        <div class="info">
+                        <div class="info" data-id="2">
                             <p>Jack In The Pulpit</p>
                             <p>RM85.00</p>
                         </div>
@@ -178,7 +178,7 @@
                                 ></a>
                             </div>
                         </div>
-                        <div class="info">
+                        <div class="info" data-id="3">
                             <p>Evergreen Candytuft</p>
                             <p>RM105.00</p>
                         </div>
@@ -197,7 +197,7 @@
                                 ></a>
                             </div>
                         </div>
-                        <div class="info">
+                        <div class="info" data-id="4">
                             <p>Flower Bouquet Pink</p>
                             <p>RM149.00</p>
                         </div>
@@ -216,7 +216,7 @@
                                 ></a>
                             </div>
                         </div>
-                        <div class="info">
+                        <div class="info" data-id="5">
                             <p>Pearly Everlasting</p>
                             <p>RM199.00</p>
                         </div>
@@ -235,7 +235,7 @@
                                 ></a>
                             </div>
                         </div>
-                        <div class="info">
+                        <div class="info" data-id="6">
                             <p>Yellow Loosestrife</p>
                             <p>RM79.00</p>
                         </div>
@@ -254,7 +254,7 @@
                                 ></a>
                             </div>
                         </div>
-                        <div class="info">
+                        <div class="info" data-id="7">
                             <p>Polka Dot Plant</p>
                             <p>RM139.00</p>
                         </div>
@@ -273,7 +273,7 @@
                                 ></a>
                             </div>
                         </div>
-                        <div class="info">
+                        <div class="info" data-id="8">
                             <p>Florem Ipsum Dolor Sit</p>
                             <p>RM99</p>
                         </div>
@@ -405,7 +405,12 @@
             </footer>
 
             <!-- Add To Cart Modal -->
-            <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+            <div
+                class="modal micromodal-slide"
+                data-product=""
+                id="modal-1"
+                aria-hidden="true"
+            >
                 <div class="modal__overlay" tabindex="-1" data-micromodal-close>
                     <div
                         class="modal__container__50vw"
@@ -436,19 +441,17 @@
                                         <input
                                             type="number"
                                             id="quantity"
-                                            value="3"
+                                            value="1"
                                             disabled
                                             style="font-weight: bold"
                                         />
-                                        <div
-                                            class="plus circleBtn"
-                                            style="background-color:green;"
-                                        >
+                                        <div class="plus circleBtn">
                                             <i class="fas fa-plus"></i>
                                         </div>
                                     </div>
                                     <div class="buttons">
                                         <button
+                                            id="addToCart"
                                             class="modal__btn modal__btn-primary"
                                         >
                                             Add To Cart
@@ -463,7 +466,6 @@
                                 </div>
                             </div>
                         </main>
-                        <footer class="modal__footer"></footer>
                     </div>
                 </div>
             </div>
@@ -510,14 +512,6 @@
                                 class="modal__btn modal__btn-primary"
                             >
                                 Login
-                            </button>
-                            <button
-                                id="register-btn"
-                                class="modal__btn"
-                                data-micromodal-close
-                                aria-label="Close this dialog window"
-                            >
-                                Close
                             </button>
                         </footer>
                     </div>
@@ -568,14 +562,54 @@
                             >
                                 Register
                             </button>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Modal -->
+            <div class="modal micromodal-slide" id="modal-4" aria-hidden="true">
+                <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+                    <div
+                        class="modal__container__30vw"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="modal-2-title"
+                        style="width: 700px"
+                    >
+                        <header class="modal__header">
+                            <h2 class="modal__title" id="modal-4-title">
+                                🛒 Shopping Cart
+                            </h2>
                             <button
-                                id="register-btn"
-                                class="modal__btn"
+                                class="modal__close"
+                                aria-label="Close modal"
                                 data-micromodal-close
-                                aria-label="Close this dialog window"
-                            >
-                                Close
-                            </button>
+                            ></button>
+                        </header>
+                        <main
+                            class="modal__content"
+                            id="modal-4-content"
+                            style="overflow-y: auto;"
+                        >
+                            <table id="checkoutTable"></table>
+                        </main>
+                        <footer
+                            id="cartFooter"
+                            class="modal__footer"
+                            style="padding-top: 30px;"
+                        >
+                            <div class="checkoutBtn">
+                                <button
+                                    class="modal__btn modal__btn-secondary"
+                                    data-micromodal-close
+                                >
+                                    Continue Shopping
+                                </button>
+                                <button class="modal__btn modal__btn-primary">
+                                    Checkout
+                                </button>
+                            </div>
                         </footer>
                     </div>
                 </div>

@@ -344,17 +344,18 @@ ul > li {
     .container .modal__overlay .modal__container__50vw {
       background-color: #fff;
       width: 50vw;
-      max-height: 100vh;
+      max-height: 85vh;
       border-radius: 4px;
-      overflow-y: auto;
       box-sizing: border-box; }
     .container .modal__overlay .modal__container__30vw {
       background-color: #fff;
       width: 32vw;
-      max-height: 100vh;
+      max-height: 85vh;
       border-radius: 4px;
-      overflow-y: auto;
-      box-sizing: border-box; }
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      overflow-y: hidden; }
   .container .modal__header {
     display: flex;
     justify-content: space-between;
@@ -379,6 +380,51 @@ ul > li {
     padding: 30px;
     line-height: 1.5;
     color: rgba(0, 0, 0, 0.8); }
+    .container .modal__content .circleBtn {
+      background: #ededed;
+      width: 25px;
+      height: 30px;
+      box-sizing: border-box;
+      border-radius: 1px;
+      cursor: pointer; }
+    .container .modal__content .fas {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      color: black;
+      font-size: 10px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+    .container .modal__content input[type="number"] {
+      -moz-appearance: textfield;
+      border: none;
+      width: 20px;
+      text-align: center; }
+      .container .modal__content input[type="number"]:disabled {
+        background-color: initial; }
+    .container .modal__content #checkoutTable {
+      vertical-align: top;
+      width: 100%;
+      max-width: 100%;
+      white-space: nowrap;
+      border-collapse: collapse;
+      border-spacing: 0; }
+    .container .modal__content .quantity-box {
+      display: flex;
+      justify-content: center; }
+    .container .modal__content th {
+      text-transform: capitalize;
+      background: #ededed; }
+    .container .modal__content tr {
+      border-bottom: 5px solid #ededed; }
+    .container .modal__content th,
+    .container .modal__content td {
+      padding: 1rem 0 1rem;
+      text-align: center; }
+    .container .modal__content .table__img {
+      width: 70px; }
     .container .modal__content .productModal {
       display: flex; }
       .container .modal__content .productModal img {
@@ -401,45 +447,6 @@ ul > li {
           color: rgba(0, 0, 0, 0.5); }
         .container .modal__content .productModal .productInfo .amount {
           display: flex; }
-          .container .modal__content .productModal .productInfo .amount .circleBtn {
-            background: red;
-            width: 21px;
-            height: 21px;
-            box-sizing: border-box;
-            border-radius: 3px;
-            cursor: pointer; }
-          .container .modal__content .productModal .productInfo .amount .fas {
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            color: white;
-            font-size: 10px;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: center;
-            align-items: center; }
-          .container .modal__content .productModal .productInfo .amount input[type="number"] {
-            -moz-appearance: textfield;
-            border: none;
-            width: 20px;
-            text-align: center; }
-            .container .modal__content .productModal .productInfo .amount input[type="number"]:disabled {
-              background-color: initial; }
-    .container .modal__content .modal__btn {
-      border: 1px solid #ff3d2a;
-      padding: 0.8rem 1.6rem;
-      cursor: pointer;
-      transition: all 0.1s ease-in-out; }
-      .container .modal__content .modal__btn:active {
-        transform: scale(0.9); }
-    .container .modal__content .modal__btn-primary {
-      background-color: #ff3d2a;
-      color: white; }
-      .container .modal__content .modal__btn-primary:active {
-        transform: scale(0.9); }
-    .container .modal__content .modal__btn-secondary {
-      background-color: initial;
-      color: #ff3d2a; }
     .container .modal__content #login__form {
       display: flex;
       flex-direction: column; }
@@ -451,6 +458,34 @@ ul > li {
         padding: 0.6rem;
         margin-top: 0.5rem;
         border: 1px solid rgba(0, 0, 0, 0.3); }
+  .container .modal__btn {
+    border: 1px solid #ff3d2a;
+    padding: 0.9rem 1.6rem;
+    cursor: pointer;
+    font-size: 14.5px;
+    min-width: 140px;
+    transition: all 0.1s ease-in-out; }
+    .container .modal__btn:active {
+      transform: scale(0.9); }
+  .container .modal__btn-primary {
+    background-color: #ff3d2a;
+    color: white; }
+    .container .modal__btn-primary:active {
+      transform: scale(0.9); }
+  .container .modal__btn-secondary {
+    background-color: initial;
+    color: #ff3d2a; }
+  .container .modal__footer {
+    padding: 0 30px 30px; }
+    .container .modal__footer .checkoutBtn {
+      display: flex;
+      justify-content: space-between; }
+    .container .modal__footer h2 {
+      width: 100%;
+      text-align: end;
+      margin-bottom: 15px; }
+    .container .modal__footer #totalPrice {
+      font-weight: lighter; }
 
 @keyframes mmfadeIn {
   from {
