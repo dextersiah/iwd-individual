@@ -110,6 +110,10 @@
                 display: flex;
                 align-self: flex-end;
 
+                ul {
+                    display: flex;
+                }
+
                 &-item {
                     list-style-type: none;
                     padding-left: 20px;
@@ -144,6 +148,7 @@
                 font-size: 4rem;
 
                 > span {
+                    font-size: 4rem;
                     color: $lighten-primary;
                 }
             }

@@ -101,6 +101,8 @@ ul > li {
       .container > header .header-navigation .nav-bar {
         display: flex;
         align-self: flex-end; }
+        .container > header .header-navigation .nav-bar ul {
+          display: flex; }
         .container > header .header-navigation .nav-bar-item {
           list-style-type: none;
           padding-left: 20px;
@@ -121,6 +123,7 @@ ul > li {
         color: white;
         font-size: 4rem; }
         .container .hero .content > h1 > span {
+          font-size: 4rem;
           color: #ff9a90; }
       .container .hero .content > p {
         padding-top: 0.5rem;

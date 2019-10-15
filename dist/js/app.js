@@ -1,7 +1,5 @@
 $('.single-item').slick();
 
-
-
 //UI Controller
 const UICtrl = (function () {
 
@@ -58,6 +56,13 @@ const UICtrl = (function () {
 
         //Table body
         tableBody: '#table-body',
+
+        //Cart Footer Item
+        totalPrice: '#totalPrice',
+
+        //Click Area
+        clickSection: '#click-section',
+
     }
 
     //Public Method to Access Private Methods/Data
@@ -127,7 +132,7 @@ const UICtrl = (function () {
         },
 
         setTotalCart: function (total) {
-            document.querySelector(UISelector.totalCart).innerHTML = total;
+            document.querySelector(UISelector.totalCart).innerHTML = `RM${total}.00`;
         },
 
         setModalInformation: function (id, price, name, picture) {
@@ -149,11 +154,15 @@ const UICtrl = (function () {
 
         recomputeProductQuantity: function (increment) {
 
+            let quantity = document.querySelector(UISelector.quantity).value;
+
             if (increment == "add") {
                 document.querySelector(UISelector.quantity).value++;
 
             } else {
-                document.querySelector(UISelector.quantity).value--;
+                if (quantity > 1) {
+                    document.querySelector(UISelector.quantity).value--;
+                }
             }
         },
 
@@ -189,7 +198,6 @@ const UICtrl = (function () {
 
             let subTotal = 0;
 
-
             data.forEach(element => {
 
                 const row = table.insertRow();
@@ -215,15 +223,17 @@ const UICtrl = (function () {
                         const quantityBox = document.createElement('div');
                         quantityBox.className = "quantity-box";
 
-                        //Create circleBtn(minus)
+                        //Create circleBtn(down)
                         const circleBtnMinus = document.createElement('div');
-                        circleBtnMinus.classList.add('minus');
+                        circleBtnMinus.classList.add('down');
                         circleBtnMinus.classList.add('circleBtn');
+                        circleBtnMinus.dataset.productId = element.id;
 
-                        //Create circleBtn(plus)
+                        //Create circleBtn(up)
                         const circleBtnPlus = document.createElement('div');
-                        circleBtnPlus.classList.add('minus');
+                        circleBtnPlus.classList.add('up');
                         circleBtnPlus.classList.add('circleBtn');
+                        circleBtnPlus.dataset.productId = element.id;
 
                         //Create circleBtn(delete)
                         const circleBtnDelete = document.createElement('div');
@@ -252,7 +262,7 @@ const UICtrl = (function () {
                         const numberInput = document.createElement('input');
 
                         //Set Attribute
-                        numberInput.id = "quantity";
+                        numberInput.id = `${UISelector.cartQuantity}-${element.id}`;
                         numberInput.setAttribute("type", "number");
                         numberInput.setAttribute("value", element[key]);
                         numberInput.disabled = true;
@@ -286,24 +296,32 @@ const UICtrl = (function () {
 
             });
 
-            //Create Total Price
-            const totalPrice = document.createElement('h2');
-            const strong = document.createElement('strong');
-            const span = document.createElement('span');
-
-            //Set Attr
-            span.id = "totalPrice";
-            span.textContent = `RM${subTotal}.00`;
-            strong.textContent = 'Total:';
-
-            //Append
-            totalPrice.appendChild(strong);
-            totalPrice.appendChild(span);
-
-            document.querySelector('#cartFooter').insertBefore(totalPrice, document.querySelector('.checkoutBtn'));
-
+            UICtrl.setTotalCart(subTotal);
+            document.querySelector(UISelector.totalPrice).textContent = `RM${subTotal}.00`;
 
         },
+
+        incrementCartValue: function (e) {
+            const list = e.target.parentNode.classList;
+            const cartInputFromDown = e.target.parentNode.nextElementSibling;
+            const cartInputFromUp = e.target.parentNode.previousSibling;
+
+            if (list.contains('up')) {
+
+                cartInputFromUp.value++;
+
+            } else {
+                if (cartInputFromDown.value > 1) {
+                    cartInputFromDown.value--;
+                }
+
+            }
+
+            return {
+                quantity: list.contains('up') ? cartInputFromUp.value : cartInputFromDown.value,
+                id: list.contains('up') ? cartInputFromUp.id.substr(15) : cartInputFromDown.id.substr(15)
+            }
+        }
     }
 })();
 
@@ -402,6 +420,33 @@ const StorageCtrl = (function () {
                 };
             });
 
+            localStorage.setItem('users', JSON.stringify(users));
+        },
+
+        updateProductToUser: function (userID, id, quantity) {
+            let users = JSON.parse(localStorage.getItem('users'));
+
+            users.forEach(user => {
+                let flowerArray;
+
+                if (user.id == userID) {
+                    if ('flowers' in user) {
+                        flowerArray = user.flowers;
+
+                        flowerArray.forEach((flower, index) => {
+                            if (flower.id == id) {
+
+                                flower.quantity = quantity;
+                            }
+                        });
+
+                    } else {
+                        flowerArray = [];
+                    }
+
+                    user.flowers = flowerArray;
+                };
+            });
             localStorage.setItem('users', JSON.stringify(users));
         },
 
@@ -589,20 +634,36 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
         document.querySelector(UISelector.totalCart).addEventListener('click', openCartModal);
 
         //Event Delegation
-        document.body.addEventListener('click', modalIncrement);
+        document.querySelector(UISelector.clickSection).addEventListener('click', eventDelegation);
 
     }
 
     //Increment Value
-    const modalIncrement = function (e) {
+    const eventDelegation = function (e) {
 
 
-        const target = e.target.parentNode;
+        const itemTarget = e.target.parentNode;
 
-        if (e.target.parentNode.classList.contains('circleBtn')) {
+        if (itemTarget.classList.contains('circleBtn') && itemTarget.classList.contains('delete')) {
 
+            //Delete Specific Item From Cart
+            StorageCtrl.removeItemFromCart(itemTarget.dataset.deleteItem);
+
+            //Repopulate Cart Data
+            loadTableData();
+
+        } else if (itemTarget.classList.contains('up') || itemTarget.classList.contains('down')) {
+
+            //Alter Input Value In Cart Modal
+            const updateDetails = UICtrl.incrementCartValue(e);
+            const currentUser = UserCtrl.getCurrentLoginUser().id;
+            StorageCtrl.updateProductToUser(currentUser, updateDetails.id, updateDetails.quantity);
+            loadTableData();
+
+        } else if (itemTarget.classList.contains('circleBtn')) {
+
+            //Alter Input Value In Product Modal
             incrementValue(e);
-
         }
 
         e.preventDefault();
@@ -656,12 +717,11 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
     const loadTotalCartPrice = function () {
         const total = StorageCtrl.recomputeTotalPrice()
 
-        UICtrl.setTotalCart(`RM${total}`);
+        UICtrl.setTotalCart(total);
     }
 
     //Computations
     const addProductWishlist = function () {
-
 
     }
 
@@ -674,6 +734,7 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
             StorageCtrl.addProductToUser(user, productInfo);
             loadTotalCartPrice();
             MicroModal.close('modal-1');
+            UICtrl.createNotification("Added", "Item has been added to cart", "success");
         } else {
             MicroModal.close('modal-1');
             MicroModal.show('modal-2');
@@ -776,9 +837,6 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
 
     const loadTableData = function () {
 
-
-
-
         const UISelector = UICtrl.getSelectors();
         const userFromStorage = JSON.parse(localStorage.getItem('users'));
         const currentUser = UserCtrl.getCurrentLoginUser();
@@ -787,15 +845,20 @@ const App = (function (UICtrl, StorageCtrl, UserCtrl) {
             .filter(userFromStorage => userFromStorage.id == currentUser.id)
             .map(userFlower => userFlower.flowers);
 
-
         let table = document.querySelector(UISelector.checkoutTable);
         table.innerHTML = '';
         let keyHeader = userFromId[0][0];
-        let allData = userFromId[0];
-        let data = Object.keys(UICtrl.sortObjKeysAlphabetically(keyHeader));
+        if (keyHeader == undefined) {
+            UICtrl.setTotalCart('0');
+            document.querySelector(UISelector.totalPrice).textContent = `RM0.00`;
+        } else {
+            let allData = userFromId[0];
+            let data = Object.keys(UICtrl.sortObjKeysAlphabetically(keyHeader));
 
-        UICtrl.loadCartTableData(table, allData);
-        UICtrl.loadCartTableHead(table, data);
+            UICtrl.loadCartTableData(table, allData);
+            UICtrl.loadCartTableHead(table, data);
+        }
+
     }
 
     return {
